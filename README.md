@@ -1,6 +1,6 @@
 # algorythms
 
-New Sort Array algorythm with 0(2n) complexity.
+1. New Sort Array algorythm with 0(2n) complexity.
 The case of 2 numbers with the same value is ignored.
 
 ```javascript
@@ -28,7 +28,7 @@ function sortArray (arr) {
 console.log(sortArray(array));
 ```
 
-Excel-like headers algorythm.
+2. Excel-like headers algorythm.
 
 ```javascript
 function columnNames(n) {
@@ -68,7 +68,7 @@ function columnNames(n) {
 console.log(columnNames(55));
 ```
 
-Spiral direction number algorythm.
+3. Spiral direction number algorythm.
 
 ```javascript
 function sortN(quantity){
@@ -100,3 +100,32 @@ function sortN(quantity){
 console.log(sortN(3));
 ```
 
+4. Find two maximum number's algorythm.
+
+```javascript
+var array = [1, 3, 5, 4, 9, 11, 7, 12, 105, 14, 11, 100];
+
+function findGreatestNumsbers(arr) {
+	var objMaxKeys = {
+		max: 0,
+		ltMax: 0
+	};
+	
+	for (var item = 0; item < arr.length; item++) {
+
+		if (objMaxKeys.max < arr[item]) {
+			objMaxKeys.ltMax =  objMaxKeys.max;
+			objMaxKeys.max = arr[item];
+		}
+
+		if (objMaxKeys.ltMax < arr[item] && arr[item] < objMaxKeys.max) {
+			objMaxKeys.ltMax =  arr[item];
+		}
+
+	}
+
+	return objMaxKeys;
+}
+
+findGreatestNumsbers(array);
+```
