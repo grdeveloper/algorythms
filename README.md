@@ -25,6 +25,8 @@ function sortArray (arr) {
 	return result;
 }
 
+// [1, 3, 6, 7, 9, 11]
+
 console.log(sortArray(array));
 ```
 
@@ -65,6 +67,8 @@ function columnNames(n) {
   return result;
 }
 
+// ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ", "BA", "BB", "BC"]
+
 console.log(columnNames(55));
 ```
 
@@ -97,6 +101,12 @@ function sortN(quantity){
     return result;
 }
 
+/*
+[1, 2, 3]
+[6, 5, 4]
+[7, 8, 9]
+*/
+
 console.log(sortN(3));
 ```
 
@@ -126,6 +136,8 @@ function findGreatestNumsbers(arr) {
 
 	return objMaxKeys;
 }
+
+// {max: 105, ltMax: 100}
 
 findGreatestNumsbers(array);
 ```
