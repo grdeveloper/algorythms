@@ -142,38 +142,32 @@ function findGreatestNumsbers(arr) {
 findGreatestNumsbers(array);
 ```
 
-5. Binary search algorythm.
+5. Find all Mondays between the given dates' algorythm.
 
 ```javascript
-var array = [
-	{prop: 1}, {prop: 2}, {prop: 3}, {prop: 4}, 
-	{prop: 5}, {prop: 6}, {prop: 7}, {prop: 8}, 
-	{prop: 9}, {prop: 10}, {prop: 11}
-];
+var START_DATE = "1/11/2017";
+var END_DATE = "5/15/2019";
 
-function findBinaryElem(arr, number){
-	var midLengthElement = Math.floor(arr.length / 2);
+function getAllMondays(startDate, endDate) {
+	var monday = 1; // representation of Monday in Date object
+	var oneDay = 1000 * 60 * 60 * 24; // milliseconds, seconds, minutes, hours
 
-	if (!arr.length) {
-		return arr;
+	var resultArray = [];
+
+	for (var i = +new Date(startDate); i < +new Date(endDate); i += oneDay) {
+		var newDay = new Date(i);
+		
+		if (newDay.getDay() === monday) {
+			resultArray.push(newDay.toLocaleDateString());
+		}
 	}
 
-	if (arr[midLengthElement]['prop'] === number) {
-		return arr[midLengthElement];
-	}
-
-	if (arr[midLengthElement]['prop'] > number) {
-		return findBinaryElem(arr.slice(0, midLengthElement), number);
-	}
-
-	if (arr[midLengthElement]['prop'] < number) {
-		return findBinaryElem(arr.slice(midLengthElement), number);
-	}
+	return resultArray;
 }
 
-// {prop: 7}
+// ["1/16/2017", "1/23/2017", "1/30/2017", ...]
 
-findBinaryElem(array, 7);
+getAllMondays(START_DATE, END_DATE);
 ```
 
 6. GrandCandy's algorythm:
@@ -229,30 +223,36 @@ function grantCandy (children, candy) {
 grantCandy(CHILDREN, CANDY);
 ```
 
-7. Find all Mondays between the given dates' algorythm.
+7. Binary search algorythm.
 
 ```javascript
-var START_DATE = "1/11/2017";
-var END_DATE = "5/15/2019";
+var array = [
+	{prop: 1}, {prop: 2}, {prop: 3}, {prop: 4}, 
+	{prop: 5}, {prop: 6}, {prop: 7}, {prop: 8}, 
+	{prop: 9}, {prop: 10}, {prop: 11}
+];
 
-function getAllMondays(startDate, endDate) {
-	var monday = 1; // representation of Monday in Date object
-	var oneDay = 1000 * 60 * 60 * 24; // milliseconds, seconds, minutes, hours
+function findBinaryElem(arr, number){
+	var midLengthElement = Math.floor(arr.length / 2);
 
-	var resultArray = [];
-
-	for (var i = +new Date(startDate); i < +new Date(endDate); i += oneDay) {
-		var newDay = new Date(i);
-		
-		if (newDay.getDay() === monday) {
-			resultArray.push(newDay.toLocaleDateString());
-		}
+	if (!arr.length) {
+		return arr;
 	}
 
-	return resultArray;
+	if (arr[midLengthElement]['prop'] === number) {
+		return arr[midLengthElement];
+	}
+
+	if (arr[midLengthElement]['prop'] > number) {
+		return findBinaryElem(arr.slice(0, midLengthElement), number);
+	}
+
+	if (arr[midLengthElement]['prop'] < number) {
+		return findBinaryElem(arr.slice(midLengthElement), number);
+	}
 }
 
-// ["1/16/2017", "1/23/2017", "1/30/2017", ...]
+// {prop: 7}
 
-getAllMondays(START_DATE, END_DATE);
+findBinaryElem(array, 7);
 ```
