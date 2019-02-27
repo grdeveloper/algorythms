@@ -225,5 +225,34 @@ function grantCandy (children, candy) {
 }
 
 // [2, 2, 3]
+
 grantCandy(CHILDREN, CANDY);
+```
+
+7. Find all Mondays between the given dates' algorythm.
+
+```javascript
+var START_DATE = "1/11/2017";
+var END_DATE = "5/15/2019";
+
+function getAllMondays(startDate, endDate) {
+	var monday = 1; // representation of Monday in Date object
+	var oneDay = 1000 * 60 * 60 * 24; // milliseconds, seconds, minutes, hours
+
+	var resultArray = [];
+
+	for (var i = +new Date(startDate); i < +new Date(endDate); i += oneDay) {
+		var newDay = new Date(i);
+		
+		if (newDay.getDay() === monday) {
+			resultArray.push(newDay.toLocaleDateString());
+		}
+	}
+
+	return resultArray;
+}
+
+// ["1/16/2017", "1/23/2017", "1/30/2017", ...]
+
+getAllMondays(START_DATE, END_DATE);
 ```
