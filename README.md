@@ -146,17 +146,9 @@ findGreatestNumsbers(array);
 
 ```javascript
 var array = [
-	{prop: 1},
-	{prop: 2},
-	{prop: 3}, 
-	{prop: 4}, 
-	{prop: 5}, 
-	{prop: 6}, 
-	{prop: 7}, 
-	{prop: 8}, 
-	{prop: 9}, 
-	{prop: 10}, 
-	{prop: 11}
+	{prop: 1}, {prop: 2}, {prop: 3}, {prop: 4}, 
+	{prop: 5}, {prop: 6}, {prop: 7}, {prop: 8}, 
+	{prop: 9}, {prop: 10}, {prop: 11}
 ];
 
 function findBinaryElem(arr, number){
@@ -183,3 +175,7 @@ function findBinaryElem(arr, number){
 
 findBinaryElem(array, 7);
 ```
+
+6. GrandCandy's algorythm:
+   
+
