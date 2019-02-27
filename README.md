@@ -177,5 +177,53 @@ findBinaryElem(array, 7);
 ```
 
 6. GrandCandy's algorythm:
+   There is an undefined quantity of candies and children.
+   First the first child gets a candy, the second one two candies, the third one three candies, etc.
+   Then the remaining candies are being shared between children, one candy per child.
    
+```javascript
+var CHILDREN = 3;
+var CANDY = 7;
 
+function grantCandy (children, candy) {
+	var resultArray= [];
+	var remainingCandies = candy;
+
+	if (candy === 0) {
+		return 0;
+	}
+
+	for (var item = 0; item < children; item++) {
+		var currentCount = item + 1;
+		
+		if (remainingCandies > currentCount) {
+			resultArray[item] = currentCount;
+		} else {
+			resultArray[item] = remainingCandies;
+			remainingCandies = 0;
+		}
+		
+		if (remainingCandies) {
+			remainingCandies -= currentCount;
+		}	
+	}
+	
+	if (remainingCandies) {
+		var currentChild = 0;
+		for (var piece = 0; piece < remainingCandies; piece++) {
+
+			if ((currentChild % children === 0) && currentChild !== 0) {
+				currentChild = 0;
+			}
+			
+			resultArray[currentChild]++;
+			currentChild++;
+		}
+	}
+
+	return resultArray;
+}
+
+// [2, 2, 3]
+grantCandy(CHILDREN, CANDY);
+```
