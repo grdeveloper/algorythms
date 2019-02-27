@@ -141,3 +141,45 @@ function findGreatestNumsbers(arr) {
 
 findGreatestNumsbers(array);
 ```
+
+5. Binary search algorythm.
+
+```javascript
+var array = [
+	{prop: 1},
+	{prop: 2},
+	{prop: 3}, 
+	{prop: 4}, 
+	{prop: 5}, 
+	{prop: 6}, 
+	{prop: 7}, 
+	{prop: 8}, 
+	{prop: 9}, 
+	{prop: 10}, 
+	{prop: 11}
+];
+
+function findBinaryElem(arr, number){
+	var midLengthElement = Math.floor(arr.length / 2);
+
+	if (!arr.length) {
+		return arr;
+	}
+
+	if (arr[midLengthElement]['prop'] === number) {
+		return arr[midLengthElement];
+	}
+
+	if (arr[midLengthElement]['prop'] > number) {
+		return findBinaryElem(arr.slice(0, midLengthElement), number);
+	}
+
+	if (arr[midLengthElement]['prop'] < number) {
+		return findBinaryElem(arr.slice(midLengthElement), number);
+	}
+}
+
+// {prop: 7}
+
+findBinaryElem(array, 7);
+```
