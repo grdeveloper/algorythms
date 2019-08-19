@@ -301,7 +301,7 @@ function group(collection) {
     
 	    for (var prop in object) {
 		if (object.hasOwnProperty(prop)) {
-		resultArray.push(object[prop]);
+			resultArray.push(object[prop]);
 	      }
 	    }
     
