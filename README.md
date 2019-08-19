@@ -387,7 +387,7 @@ function match(str, left, right) {
 		return str;
 	}
 
-	return `${str.substr(0, leftIndex)}${opening}${str.substr(leftIndex, rightIndex - 	opening.length)}${closing}${str.substr(rightIndex + [opening, closing].length)}`;
+	return `${str.substr(0, leftIndex)}${opening}${str.substr(leftIndex, rightIndex - opening.length)}${closing}${str.substr(rightIndex + [opening, closing].length)}`;
 }
 
 // "Thi[s Javascript was born to] love you"
