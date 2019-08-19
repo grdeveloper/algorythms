@@ -269,6 +269,48 @@ var collection = [
       { field: 'type0', value: { dataLeft: 0, dataRight: 2 } }, 
       { field: 'type1', value: { dataLeft: 1, dataRight: 2 } }
     ];
+    
+/*
+	Imperative way
+*/
+
+function group(collection) {
+  	let object = {};
+    	let resultArray = [];
+  
+  	loop: for (let item = 0; item < collection.length; item++) {
+    	      let currentItem = collection[item];
+    
+	      if (!object[currentItem.field]) {
+		object[currentItem.field] = {
+		  groupName: currentItem.field,
+		  groupSource: [currentItem.value]
+		};
+
+	      } else {
+
+		object[currentItem.field]
+		.groupSource
+		.push(currentItem.value);
+
+	      }
+      
+	      let groupSource = object[currentItem.field].groupSource;
+	      groupSource[groupSource.length - 1].field = currentItem.field;
+    	}
+    
+	    for (var prop in object) {
+		if (object.hasOwnProperty(prop)) {
+		resultArray.push(object[prop]);
+	      }
+	    }
+    
+    return resultArray;
+  }
+
+/*
+	Declarative way
+*/
 
 function group(collection) {
 	const sortedTypes = [...new Set(
