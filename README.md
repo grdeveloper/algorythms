@@ -315,11 +315,11 @@ function group(collection) {
 function group(collection) {
 	const sortedTypes = [...new Set(
 		collection
-		.map(item => item.field)
-		.sort()
-		)].map(item => ({
-		groupName: item,
-		groupSource: []
+			.map(item => item.field)
+			.sort()
+			)].map(item => ({
+				groupName: item,
+				groupSource: []
 	}));
       
 	collection
