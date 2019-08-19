@@ -260,7 +260,7 @@ findBinaryElem(array, 7);
 8. Transform input collection into another group.
 
 ```javascript
-var collection = [
+let collection = [
       { field: 'type1', value: { dataLeft: 1, dataRight: 0 } }, 
       { field: 'type2', value: { dataLeft: 2, dataRight: 0 } }, 
       { field: 'type0', value: { dataLeft: 0, dataRight: 0 } }, 
@@ -299,7 +299,7 @@ function group(collection) {
 	      groupSource[groupSource.length - 1].field = currentItem.field;
     	}
     
-	    for (var prop in object) {
+	    for (let prop in object) {
 		if (object.hasOwnProperty(prop)) {
 			resultArray.push(object[prop]);
 	      }
@@ -362,3 +362,36 @@ function group(collection) {
 
 group(collection);
 ```
+
+9. Select the text as an array between the given letters.
+
+```javascript
+const str = 'This Javascript was born to love you';
+
+function match(str, left, right) {
+	let leftIndex;
+	let rightIndex;
+	let [opening, closing] = ['[', ']'];
+
+	for (let i = 0; i < str.length; i++) {
+		if (str[i] === left && !leftIndex && leftIndex !== 0) {
+			leftIndex = i;
+		}
+
+		if (str[i] === right && (leftIndex || leftIndex === 0)) {
+			rightIndex = i;
+		}
+	}
+    
+    if (!(leftIndex && rightIndex)) {
+		return str;
+	}
+
+	return `${str.substr(0, leftIndex)}${opening}${str.substr(leftIndex, rightIndex - 	opening.length)}${closing}${str.substr(rightIndex + [opening, closing].length)}`;
+}
+
+// "Thi[s Javascript was born to] love you"
+
+match(str, 's', 't');
+```
+
