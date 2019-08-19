@@ -256,3 +256,67 @@ function findBinaryElem(arr, number){
 
 findBinaryElem(array, 7);
 ```
+
+8. Transform input collection into another group.
+
+```javascript
+var collection = [
+      { field: 'type1', value: { dataLeft: 1, dataRight: 0 } }, 
+      { field: 'type2', value: { dataLeft: 2, dataRight: 0 } }, 
+      { field: 'type0', value: { dataLeft: 0, dataRight: 0 } }, 
+      { field: 'type1', value: { dataLeft: 1, dataRight: 1 } }, 
+      { field: 'type0', value: { dataLeft: 0, dataRight: 1 } }, 
+      { field: 'type0', value: { dataLeft: 0, dataRight: 2 } }, 
+      { field: 'type1', value: { dataLeft: 1, dataRight: 2 } }
+    ];
+
+function group(collection) {
+	const sortedTypes = [...new Set(
+		collection
+		.map(item => item.field)
+		.sort()
+		)].map(item => ({
+		groupName: item,
+		groupSource: []
+	}));
+      
+	collection
+		.forEach(item => {
+			return sortedTypes
+			  .find(entity => entity.groupName === item.field)
+			  .groupSource
+			  .push({...item.value, 'field': item.field});
+	});
+      
+        return sortedTypes;
+  }
+
+/*
+   [ 
+      {
+        "groupName": "type0",
+        "groupSource": [
+          { "dataLeft": 0, "dataRight": 0, "field": "type0" }, 
+          { "dataLeft": 0, "dataRight": 1, "field": "type0" }, 
+          { "dataLeft": 0, "dataRight": 2, "field": "type0" }
+        ]
+      },
+      { 
+      	"groupName": "type1", 
+      	"groupSource": [
+          { "dataLeft": 1, "dataRight": 0, "field": "type1" }, 
+          { "dataLeft": 1, "dataRight": 1, "field": "type1" }, 
+          { "dataLeft": 1, "dataRight": 2, "field": "type1" }
+        ]
+      }, 
+      {
+        "groupName": "type2",
+        "groupSource": [
+        	{ "dataLeft": 2, "dataRight": 0, "field": "type2" }
+        ]
+      }
+    ]
+*/
+
+group(collection);
+```
