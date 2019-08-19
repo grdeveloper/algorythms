@@ -383,7 +383,7 @@ function match(str, left, right) {
 		}
 	}
     
-    if (!(leftIndex && rightIndex)) {
+    	if (!(leftIndex && rightIndex)) {
 		return str;
 	}
 
