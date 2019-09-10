@@ -374,7 +374,7 @@ function match(str, left, right) {
 	let [opening, closing] = ['[', ']'];
 
 	for (let i = 0; i < str.length; i++) {
-		if (str[i] === left && !leftIndex && leftIndex !== 0) {
+		if (str[i] === left && !leftIndex && !!~leftIndex) {
 			leftIndex = i;
 		}
 
