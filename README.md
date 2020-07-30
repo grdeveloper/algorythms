@@ -488,3 +488,48 @@ export class Store {
   }
 }
 ```
+
+12. Custom Promise
+
+```javascript
+var d = new Deferred();
+d.then(function(res){
+    console.log("1 ", res);
+    var d1 = new Deferred();
+    setTimeout(function(){ d1.resolve("a"); }, 2000);
+    return d1;
+});
+d.then(function(res){ console.log("2 ", res); return "b"; });
+d.then(function(res){ console.log("3 ", res); return "c"; });
+d.resolve("hello");
+
+// 1 hello     
+// 2 a
+// 3 b
+
+class Deferred {
+
+  constructor() {
+    this.ctx = null;
+    this.fns = [];
+  }
+
+  then(cb) {
+    this.fns.push(cb);
+  }
+
+  resolve(param) {
+    thix.ctx = param;
+    for (let i=0; i<this.fns.length; i++) {
+      this.ctx = this.fns[i](this.ctx);
+      if (this.ctx instanceof Deferred) {
+	const remainingFns = this.fns.slice(i+1);
+	this.ctx.fns.push(...remainingFns);
+        break;
+    }
+  }
+
+}
+
+```
+
