@@ -533,3 +533,43 @@ class Deferred {
 
 ```
 
+13. React Input Debounce
+```javascript
+import * as React from 'react';
+
+function debounce<T>(cb: (...args: Array<T>) => void, delay = 1000) {
+  let timeout = 0;
+
+  return (...args: Array<T>) => {
+    timeout && clearTimeout(timeout);
+    timeout = setTimeout((): void => {
+      cb(...args);
+    }, delay);
+  };
+}
+
+function App() {
+  const [input, setInput] = React.useState<string>();
+
+  const debounceInputChange = debounce<React.ChangeEvent<HTMLInputElement>>(
+    (event): void => {
+      const { target } = event;
+      const { value } = target as HTMLInputElement;
+
+      setInput(value);
+    }
+  );
+
+  return (
+    <>
+      <input onChange={debounceInputChange} />
+      <span>{input}</span>
+    </>
+  );
+}
+
+export default App;
+
+```
+
+
