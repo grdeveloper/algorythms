@@ -572,4 +572,88 @@ export default App;
 
 ```
 
+14. React Incremental Observer
+```javascript
+interface Item { id: number; label: string; }
 
+interface Data { count: number; items: Array<Item>; }
+
+const createData = (startIndex: number): Array<Item> => {
+  return Array.from({ length: 5 }, (_item: unknown, index: number): Item => {
+    const id = index + startIndex;
+    return { id, label: `Card number: ${id}` };
+  });
+};
+
+const data: Record<string, Data> = {
+  0: { items: createData(0), count: 15 },
+  1: { items: createData(5), count: 15 },
+  2: { items: createData(10), count: 15 },
+};
+
+const requestData = (offset: number): Promise<Data> => {
+  return new Promise(
+    (resolve: (data: Data) => void, reject: (error: Error) => void): void => {
+      setTimeout((): void => {
+        const { length } = Object.keys(data);
+        if (offset > length - 1) return reject(new Error('invalid call'));
+        resolve(data[offset]);
+      }, 1000);
+    }
+  );
+};
+
+function App() {
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
+
+  const [offset, setOffset] = React.useState<number>(0);
+  const [state, setState] = React.useState<Data>({ items: [], count: 0 });
+
+  React.useEffect(() => {
+    requestData(offset)
+      .then(({ items, count }: Data): void => {
+        setState(({ items: previousItems }: Data): Data => {
+          return { count, items: [...previousItems, ...items] };
+        });
+      })
+      .catch(console.warn);
+  }, [offset]);
+
+  React.useEffect(() => {
+    const { current: container } = containerRef;
+    const { lastElementChild } = container as HTMLDivElement;
+
+    const { count, items: { length }} = state;
+    if (!length || length >= count) return;
+
+    const observer = new IntersectionObserver(
+      (entries: Array<IntersectionObserverEntry>): void => {
+        const [entry] = entries;
+        entry.isIntersecting &&
+          setOffset((previousOffset: number): number => ++previousOffset);
+      },
+      { threshold: 0, root: container },
+    );
+
+    observer.observe(lastElementChild as HTMLDivElement);
+    return (): void => observer.disconnect();
+  }, [state, containerRef]);
+
+  return (
+    <div
+      ref={containerRef}
+      style={{ width: '12rem', height: '12rem', overflow: 'scroll', border: '0.125rem solid blue' }}
+    >
+      {state.items.map(({ id, label }: Item) => {
+        return (
+          <div
+            key={id.toString()}
+            style={{ textAlign: 'center', padding: '1rem 2rem', background: 'yellow' }}
+          >{label}</div>
+        );
+      })}
+    </div>
+  );
+}
+
+```
